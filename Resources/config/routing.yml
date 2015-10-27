@@ -1,0 +1,3 @@
+ez_systems_extending_platform_ui_conference_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: EzSystemsExtendingPlatformUIConferenceBundle:Default:index }
