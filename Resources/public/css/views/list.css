@@ -1,0 +1,13 @@
+/*
+ * ez-view-ezconflistview is auto generated when using
+ * TemplateBasedView after the internal name of the view the `ez-view-` prefix
+ * It's a good practice to use it to style the view result, that way you are
+ * sure you won't break anything in the app :)
+ */
+.ez-view-ezconflistview {
+    background: #fff;
+}
+
+.ez-view-ezconflistview .ezconf-list-title {
+    margin-top: 0;
+}
