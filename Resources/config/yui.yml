@@ -8,5 +8,8 @@ system:
                     dependencyOf: ['ez-platformuiapp']
                     path: %extending_platformui.public_dir%/js/apps/plugins/ezconf-listappplugin.js
                 ezconf-listview:
-                    requires: ['ez-view']
+                    requires: ['ez-templatebasedview', 'ezconflistview-ez-template']
                     path: %extending_platformui.public_dir%/js/views/ezconf-listview.js
+                ezconflistview-ez-template: # internal view name + '-ez-template' suffix
+                    type: 'template' # mandatory so that the template is available in JavaScript
+                    path: %extending_platformui.public_dir%/templates/ezconflistview.hbt
