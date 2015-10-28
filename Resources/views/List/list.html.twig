@@ -1,0 +1,17 @@
+{% extends "eZPlatformUIBundle::pjax_admin.html.twig" %}
+
+{% block header_title %}
+    <h1 class="ezconf-list-title">List view</h1>
+{% endblock %}
+
+
+{% block content %}
+<ul class="ezconf-list">
+{% for value in results.searchHits %}
+    <li><a href="">{{ value.valueObject.contentInfo.name }}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}
+
+
+{% block title %}List{% endblock %}

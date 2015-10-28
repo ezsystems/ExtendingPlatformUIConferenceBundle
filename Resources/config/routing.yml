@@ -1,3 +1,7 @@
 ez_systems_extending_platform_ui_conference_homepage:
     path:     /hello/{name}
     defaults: { _controller: EzSystemsExtendingPlatformUIConferenceBundle:Default:index }
+
+list:
+    path:     /list
+    defaults: { _controller: ezsystems.extendingplatformuiconference.controller.list:listAction }
