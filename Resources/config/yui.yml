@@ -4,7 +4,7 @@ system:
             modules:
                 # use your prefix, not "ez-"
                 ezconf-listapplugin: # should match the first parameter of YUI.add
-                    requires: ['ez-pluginregistry', 'plugin', 'base'] # depends on the plugin code
+                    requires: ['ez-pluginregistry', 'plugin', 'base', 'ezconf-listview'] # depends on the plugin code
                     dependencyOf: ['ez-platformuiapp']
                     path: %extending_platformui.public_dir%/js/apps/plugins/ezconf-listappplugin.js
                 ezconf-listview:
