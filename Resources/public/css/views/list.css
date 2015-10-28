@@ -11,3 +11,7 @@
 .ez-view-ezconflistview .ezconf-list-title {
     margin-top: 0;
 }
+
+.ez-view-ezconflistview .ezconf-list {
+    margin: 0;
+}

@@ -24,10 +24,23 @@ YUI.add('ezconf-listview', function (Y) {
             // as a variable named after the property.
             this.get('container').setHTML(
                 this.template({
-                    "name": "listView"
+                    locations: this._getJsonifiedLocations(),
                 })
             );
             return this;
         },
+
+        _getJsonifiedLocations: function () {
+            // to get usable objects in the template
+            return Y.Array.map(this.get('locations'), function (loc) {
+                return loc.toJSON();
+            });
+        },
+    }, {
+        ATTRS: {
+            locations: {
+                value: [],
+            }
+        }
     });
 });

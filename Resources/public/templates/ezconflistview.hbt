@@ -1,3 +1,7 @@
 <h1 class="ezconf-list-title">List view</h1>
 
-Hey, I'm the {{ name }} and I'm rendered with the template!
+<ul class="ezconf-list">
+{{#each locations}}
+    <li><a href="{{path "viewLocation" id=id languageCode=contentInfo.mainLanguageCode}}">{{ contentInfo.name }}</a></li>
+{{/each}}
+</ul>
