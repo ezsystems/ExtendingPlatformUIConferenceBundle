@@ -13,6 +13,18 @@ YUI.add('ezconf-navigationplugin', function (Y) {
 
             console.log("Hey, I'm a plugin for NavigationHubViewService");
             console.log("And I'm plugged in ", service);
+
+            console.log("Let's add the navigation item in the Content zone");
+            service.addNavigationItem({
+                Constructor: Y.eZ.NavigationItemView,
+                config: {
+                    title: "List contents",
+                    identifier: "ezconf-list-contents",
+                    route: {
+                        name: "eZConfList" // same route name of the one added in the app plugin
+                    }
+                }
+            }, 'platform'); // identifier of the zone called "Content" in the UI
         },
     }, {
         NS: 'ezconfNavigation'

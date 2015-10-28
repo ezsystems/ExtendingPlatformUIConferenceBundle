@@ -8,7 +8,7 @@ system:
                     dependencyOf: ['ez-platformuiapp']
                     path: %extending_platformui.public_dir%/js/apps/plugins/ezconf-listappplugin.js
                 ezconf-navigationplugin:
-                    requires: ['ez-pluginregistry', 'ez-viewservicebaseplugin']
+                    requires: ['ez-pluginregistry', 'ez-viewservicebaseplugin', 'ez-navigationitemview']
                     dependencyOf: ['ez-navigationhubviewservice']
                     path: %extending_platformui.public_dir%/js/views/services/plugins/ezconf-navigationplugin.js
                 ezconf-listview:
