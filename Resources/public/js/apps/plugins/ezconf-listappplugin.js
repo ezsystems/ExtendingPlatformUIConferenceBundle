@@ -21,6 +21,7 @@ YUI.add('ezconf-listapplugin', function (Y) {
                 name: "eZConfList",
                 path: "/ezconf/list",
                 view: "ezconfListView",
+                service: Y.eZConf.ListViewService, // the service will be used to load the necessary data
                 // we want the navigationHub (top menu) but not the discoveryBar
                 // (left bar), we can try different options
                 sideViews: {'navigationHub': true, 'discoveryBar': false},
