@@ -12,7 +12,7 @@ system:
                     dependencyOf: ['ez-navigationhubviewservice']
                     path: %extending_platformui.public_dir%/js/views/services/plugins/ezconf-navigationplugin.js
                 ezconf-listviewservice:
-                    requires: ['ez-viewservice']
+                    requires: ['ez-serversideviewservice']
                     path: %extending_platformui.public_dir%/js/views/services/ezconf-listviewservice.js
                 ezconf-listview:
                     requires: ['ez-templatebasedview', 'ezconflistview-ez-template']
