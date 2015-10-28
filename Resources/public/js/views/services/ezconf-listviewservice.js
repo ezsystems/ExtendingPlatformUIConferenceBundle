@@ -29,6 +29,14 @@ YUI.add('ezconf-listviewservice', function (Y) {
                 callback();
             }, this));
         },
+
+        // _getViewParameters is called to "feed" the view configured in the
+        // route.
+        _getViewParameters: function () {
+            return {
+                locations: this.get('locations'),
+            };
+        },
     }, {
         ATTRS: {
             locations: {
