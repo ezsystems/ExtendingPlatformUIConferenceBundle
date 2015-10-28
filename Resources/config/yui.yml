@@ -7,3 +7,6 @@ system:
                     requires: ['ez-pluginregistry', 'plugin', 'base'] # depends on the plugin code
                     dependencyOf: ['ez-platformuiapp']
                     path: %extending_platformui.public_dir%/js/apps/plugins/ezconf-listappplugin.js
+                ezconf-listview:
+                    requires: ['ez-view']
+                    path: %extending_platformui.public_dir%/js/views/ezconf-listview.js
