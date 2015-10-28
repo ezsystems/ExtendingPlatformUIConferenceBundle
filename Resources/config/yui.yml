@@ -15,8 +15,5 @@ system:
                     requires: ['ez-serversideviewservice']
                     path: %extending_platformui.public_dir%/js/views/services/ezconf-listviewservice.js
                 ezconf-listview:
-                    requires: ['ez-templatebasedview', 'ezconflistview-ez-template']
+                    requires: ['ez-serversideview']
                     path: %extending_platformui.public_dir%/js/views/ezconf-listview.js
-                ezconflistview-ez-template: # internal view name + '-ez-template' suffix
-                    type: 'template' # mandatory so that the template is available in JavaScript
-                    path: %extending_platformui.public_dir%/templates/ezconflistview.hbt

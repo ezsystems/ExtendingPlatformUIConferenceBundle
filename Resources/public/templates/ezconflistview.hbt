@@ -1,3 +1,0 @@
-<h1 class="ezconf-list-title">List view</h1>
-
-Hey, I'm the {{ name }} and I'm rendered with the template!
