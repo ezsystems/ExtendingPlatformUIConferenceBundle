@@ -23,15 +23,21 @@ class ListController extends BaseController
     public function listAction($offset, $typeIdentifier)
     {
         $typesByGroup = [];
+        $typesByIdentifier = [];
         $groups = $this->contentTypeService->loadContentTypeGroups();
         foreach($groups as $group) {
             $typesByGroup[$group->identifier] = $this->contentTypeService->loadContentTypes($group);
+            foreach($typesByGroup[$group->identifier] as $type) {
+                $typesById[$type->id] = $type;
+            }
         }
 
         $limit = 10;
+        $type = null;
         $query = new LocationQuery();
         if ( $typeIdentifier ) {
-            $query->query = new Criterion\ContentTypeIdentifier($typeIdentifier);
+            $type = $this->contentTypeService->loadContentTypeByIdentifier($typeIdentifier);
+            $query->query = new Criterion\ContentTypeIdentifier($type->identifier);
         } else {
             $query->query = new Criterion\Subtree('/1/');
         }
@@ -50,7 +56,9 @@ class ListController extends BaseController
         return $this->render('EzSystemsExtendingPlatformUIConferenceBundle:List:list.html.twig', [
             'groups' => $groups,
             'typesByGroup' => $typesByGroup,
+            'typesById' => $typesById,
             'typeIdentifier' => $typeIdentifier,
+            'contentType' => $type,
             'results' => $results,
             'previous' => $previous,
             'next' => $next,

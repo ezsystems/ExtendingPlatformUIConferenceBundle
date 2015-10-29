@@ -1,35 +1,33 @@
 {% extends "eZPlatformUIBundle::pjax_admin.html.twig" %}
 
 {% block header_title %}
-    <h1 class="ezconf-list-title">List view</h1>
+    <h1 class="ezconf-list-title">Content list</h1>
 {% endblock %}
 
 
 {% block content %}
 <div class="ezconf-list-toolbar">
-    <label for="types-list">Filter by content type</label>
-    <select id="types-list" class="ezconf-list-types">
-        <option value="">None</option>
-    {% for group in groups %}
-        <optgroup label="{{ group.identifier }}">
-        {% for type in typesByGroup[group.identifier] %}
-            <option value="{{ type.identifier }}"{% if type.identifier == typeIdentifier %}selected{% endif %}>{{ type.names['eng-GB'] }}</option>
-        {% endfor %}
-        </optgroup>
-    {% endfor %}
-    </select>
+    <fieldset>
+        <legend class="ezconf-list-toolbar-legend">Filter by Content Type</legend>
+        <p class="ezconf-list-filter pure-form">
+            <label for="types-list">Choose a Content Type to only display Contents of this type</label>
+            <select id="types-list" class="ezconf-list-types">
+                <option value="">None</option>
+            {% for group in groups %}
+                <optgroup label="{{ group.identifier }}">
+                {% for type in typesByGroup[group.identifier] %}
+                    <option value="{{ type.identifier }}"{% if type.identifier == typeIdentifier %}selected{% endif %}>{{ type.names['eng-GB'] }}</option>
+                {% endfor %}
+                </optgroup>
+            {% endfor %}
+            </select>
+        </p>
+    </fieldset>
 </div>
 
-<ul class="ezconf-list">
-{% for value in results.searchHits %}
-    <li><a class="ezconf-list-location" href=""
-        data-route-name="viewLocation"
-        data-route-id="{{ path('ezpublish_rest_loadLocation', {locationPath: value.valueObject.pathString|trim('/')}) }}"
-        data-route-languageCode="{{ value.valueObject.contentInfo.mainLanguageCode }}"
-        >{{ value.valueObject.contentInfo.name }}</a></li>
-{% endfor %}
-</ul>
+<h2>{{ results.totalCount }} contents{% if contentType %} of type "{{ contentType.names['eng-GB'] }}"{% endif %}</h2>
 
+{% if previous is not same as (false) or next %}
 <ul class="ezconf-list-pagination">
     <li class="ezconf-list-page ezconf-list-previous">
     {% if previous is not same as(false) %}
@@ -46,6 +44,55 @@
     {% endif %}
     </li>
 </ul>
+{% endif %}
+
+{% if results.searchHits %}
+<table class="ezconf-list pure-table pure-table-striped">
+<thead>
+    <tr>
+        <th>Name</th>
+        <th>Content type</th>
+        <th>Modified</th>
+        <th>Published</th>
+    </tr>
+</thead>
+<tbody>
+{% for value in results.searchHits %}
+<tr>
+    <td>
+        <a class="ezconf-list-location" href=""
+        data-route-name="viewLocation"
+        data-route-id="{{ path('ezpublish_rest_loadLocation', {locationPath: value.valueObject.pathString|trim('/')}) }}"
+        data-route-languageCode="{{ value.valueObject.contentInfo.mainLanguageCode }}"
+        >{{ value.valueObject.contentInfo.name }}</a>
+    </td>
+    <td>{{ typesById[value.valueObject.contentInfo.contentTypeId].names['eng-GB'] }}</td>
+    <td>{{ value.valueObject.contentInfo.modificationDate|localizeddate( 'short', 'medium' ) }}</td>
+    <td>{{ value.valueObject.contentInfo.publishedDate|localizeddate( 'short', 'medium' ) }}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% endif %}
+
+{% if previous is not same as (false) or next %}
+<ul class="ezconf-list-pagination">
+    <li class="ezconf-list-page ezconf-list-previous">
+    {% if previous is not same as(false) %}
+        <a href="{{ path('list', {offset: previous, typeIdentifier: typeIdentifier}) }}" class="ezconf-list-page-link" data-offset="{{ previous }}" data-typeidentifier="{{ typeIdentifier }}">&laquo; Previous</a>
+    {% else %}
+        <span>&laquo; Previous</span>
+    {% endif %}
+    </li>
+    <li class="ezconf-list-page ezconf-list-next">
+    {% if next %}
+        <a href="{{ path('list', {offset: next, typeIdentifier: typeIdentifier}) }}" class="ezconf-list-page-link" data-offset="{{ next }}" data-typeidentifier="{{ typeIdentifier }}">Next &raquo;</a>
+    {% else %}
+        <span>Next &raquo;</span>
+    {% endif %}
+    </li>
+</ul>
+{% endif %}
 {% endblock %}
 
 
