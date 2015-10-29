@@ -6,6 +6,20 @@
 
 
 {% block content %}
+<div class="ezconf-list-toolbar">
+    <label for="types-list">Filter by content type</label>
+    <select id="types-list">
+        <option value="">None</option>
+    {% for group in groups %}
+        <optgroup label="{{ group.identifier }}">
+        {% for type in typesByGroup[group.identifier] %}
+            <option value="{{ type.identifier }}"{% if type.identifier == typeIdentifier %}selected{% endif %}>{{ type.names['eng-GB'] }}</option>
+        {% endfor %}
+        </optgroup>
+    {% endfor %}
+    </select>
+</div>
+
 <ul class="ezconf-list">
 {% for value in results.searchHits %}
     <li><a class="ezconf-list-location" href=""

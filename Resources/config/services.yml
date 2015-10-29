@@ -1,5 +1,5 @@
 services:
     ezsystems.extendingplatformuiconference.controller.list:
         class: EzSystems\ExtendingPlatformUIConferenceBundle\Controller\ListController
-        arguments: [@ezpublish.api.service.search]
+        arguments: [@ezpublish.api.service.search, @ezpublish.api.service.content_type]
         parent: ezsystems.platformui.controller.base
