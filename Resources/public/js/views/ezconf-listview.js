@@ -27,13 +27,15 @@ YUI.add('ezconf-listview', function (Y) {
         },
 
         _navigateToOffset: function (e) {
-            var offset = e.target.getData('offset');
+            var offset = e.target.getData('offset'),
+                typeIdentifier = e.target.getData('typeIdentifier');
 
             e.preventDefault();
             this.fire('navigateTo', {
-                routeName: 'eZConfListOffset',
+                routeName: 'eZConfListOffsetTypeIdentifier',
                 routeParams: {
                     offset: offset,
+                    typeIdentifier: typeIdentifier,
                 },
             });
         },
