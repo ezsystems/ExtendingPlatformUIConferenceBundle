@@ -8,7 +8,11 @@
 {% block content %}
 <ul class="ezconf-list">
 {% for value in results.searchHits %}
-    <li><a href="">{{ value.valueObject.contentInfo.name }}</a></li>
+    <li><a class="ezconf-list-location" href=""
+        data-route-name="viewLocation"
+        data-route-id="{{ path('ezpublish_rest_loadLocation', {locationPath: value.valueObject.pathString|trim('/')}) }}"
+        data-route-languageCode="{{ value.valueObject.contentInfo.mainLanguageCode }}"
+        >{{ value.valueObject.contentInfo.name }}</a></li>
 {% endfor %}
 </ul>
 {% endblock %}
