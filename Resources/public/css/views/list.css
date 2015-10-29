@@ -15,3 +15,24 @@
 .ez-view-ezconflistview .ezconf-list {
     margin: 0;
 }
+
+.ez-view-ezconflistview .ezconf-list-pagination {
+    margin: 0;
+    width: 100%;
+    list-style-type: none;
+}
+
+.ez-view-ezconflistview .ezconf-list-page {
+    display: inline-block;
+    width: 40%;
+}
+
+.ez-view-ezconflistview .ezconf-list-previous {
+    text-align: right;
+    margin-right: 1em;
+}
+
+.ez-view-ezconflistview .ezconf-list-next {
+    text-align: left;
+    margin-left: 1em;
+}

@@ -15,6 +15,23 @@
         >{{ value.valueObject.contentInfo.name }}</a></li>
 {% endfor %}
 </ul>
+
+<ul class="ezconf-list-pagination">
+    <li class="ezconf-list-page ezconf-list-previous">
+    {% if previous is not same as(false) %}
+        <a href="{{ path('list', {offset: previous}) }}">&laquo; Previous</a>
+    {% else %}
+        <span>&laquo; Previous</span>
+    {% endif %}
+    </li>
+    <li class="ezconf-list-page ezconf-list-next">
+    {% if next %}
+        <a href="{{ path('list', {offset: next}) }}">Next &raquo;</a>
+    {% else %}
+        <span>Next &raquo;</span>
+    {% endif %}
+    </li>
+</ul>
 {% endblock %}
 
 
