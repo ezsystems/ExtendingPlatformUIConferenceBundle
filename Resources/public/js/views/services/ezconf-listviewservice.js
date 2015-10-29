@@ -23,7 +23,14 @@ YUI.add('ezconf-listviewservice', function (Y) {
         // _load is automatically called when the view service is configured for
         // a route. callback should be executed when everything is finished
         _load: function (callback) {
-            var uri = this.get('app').get('apiRoot') + 'list';
+            // the request allows to retrieve the matched parameters
+            var offset = this.get('request').params.offset,
+                uri;
+
+            if ( !offset ) {
+                offset = 0;
+            }
+            uri = this.get('app').get('apiRoot') + 'list/' + offset;
 
             Y.io(uri, {
                 method: 'GET',
