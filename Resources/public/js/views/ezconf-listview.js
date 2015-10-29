@@ -19,11 +19,26 @@ YUI.add('ezconf-listview', function (Y) {
             '.ezconf-list-page-link': {
                 'tap': '_navigateToOffset'
             },
+            '.ezconf-list-types': {
+                'change': '_filterByType'
+            }
         },
 
         initializer: function () {
             console.log("Hey, I'm the list view");
             this.containerTemplate = '<div class="ez-view-ezconflistview"/>';
+        },
+
+        _filterByType: function (e) {
+            var select = e.target;
+
+            this.fire('navigateTo', {
+                routeName: 'eZConfListOffsetTypeIdentifier',
+                routeParams: {
+                    offset: "0", // offset: 0 does not work, bug in PlatformUI
+                    typeIdentifier: select.get('value'),
+                }
+            });
         },
 
         _navigateToOffset: function (e) {

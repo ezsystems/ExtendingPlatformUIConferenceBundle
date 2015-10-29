@@ -8,7 +8,7 @@
 {% block content %}
 <div class="ezconf-list-toolbar">
     <label for="types-list">Filter by content type</label>
-    <select id="types-list">
+    <select id="types-list" class="ezconf-list-types">
         <option value="">None</option>
     {% for group in groups %}
         <optgroup label="{{ group.identifier }}">
