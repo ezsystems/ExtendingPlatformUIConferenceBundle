@@ -27,6 +27,17 @@ YUI.add('ezconf-listapplugin', function (Y) {
                 sideViews: {'navigationHub': true, 'discoveryBar': false},
                 callbacks: ['open', 'checkUser', 'handleSideViews', 'handleMainView'],
             });
+
+            // adding a new route so that we don't have anything else to change
+            // and we can manage the default `offset` value in the view service
+            app.route({
+                name: "eZConfListOffset",
+                path: "/ezconf/list/:offset/",
+                view: "ezconfListView",
+                service: Y.eZConf.ListViewService,
+                sideViews: {'navigationHub': true, 'discoveryBar': false},
+                callbacks: ['open', 'checkUser', 'handleSideViews', 'handleMainView'],
+            });
         },
     }, {
         NS: 'ezconfTypeApp' // don't forget that
