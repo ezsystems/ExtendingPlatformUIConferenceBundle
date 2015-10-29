@@ -19,14 +19,14 @@
 <ul class="ezconf-list-pagination">
     <li class="ezconf-list-page ezconf-list-previous">
     {% if previous is not same as(false) %}
-        <a href="{{ path('list', {offset: previous}) }}">&laquo; Previous</a>
+        <a href="{{ path('list', {offset: previous}) }}" class="ezconf-list-page-link" data-offset="{{ previous }}">&laquo; Previous</a>
     {% else %}
         <span>&laquo; Previous</span>
     {% endif %}
     </li>
     <li class="ezconf-list-page ezconf-list-next">
     {% if next %}
-        <a href="{{ path('list', {offset: next}) }}">Next &raquo;</a>
+        <a href="{{ path('list', {offset: next}) }}" class="ezconf-list-page-link" data-offset="{{ next }}">Next &raquo;</a>
     {% else %}
         <span>Next &raquo;</span>
     {% endif %}

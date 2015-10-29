@@ -15,12 +15,27 @@ YUI.add('ezconf-listview', function (Y) {
             '.ezconf-list-location': {
                 // tap is 'fast click' (touch friendly)
                 'tap': '_navigateToLocation'
-            }
+            },
+            '.ezconf-list-page-link': {
+                'tap': '_navigateToOffset'
+            },
         },
 
         initializer: function () {
             console.log("Hey, I'm the list view");
             this.containerTemplate = '<div class="ez-view-ezconflistview"/>';
+        },
+
+        _navigateToOffset: function (e) {
+            var offset = e.target.getData('offset');
+
+            e.preventDefault();
+            this.fire('navigateTo', {
+                routeName: 'eZConfListOffset',
+                routeParams: {
+                    offset: offset,
+                },
+            });
         },
 
         _navigateToLocation: function (e) {
