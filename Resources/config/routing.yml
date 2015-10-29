@@ -3,7 +3,8 @@ ez_systems_extending_platform_ui_conference_homepage:
     defaults: { _controller: EzSystemsExtendingPlatformUIConferenceBundle:Default:index }
 
 list:
-    path:     /list/{offset}
-    defaults: { _controller: ezsystems.extendingplatformuiconference.controller.list:listAction, offset: 0 }
+    path:     /list/{offset}/{typeIdentifier}
+    defaults: { _controller: ezsystems.extendingplatformuiconference.controller.list:listAction, offset: 0, typeIdentifier: "" }
     requirements:
         offset: \d+
+        typeIdentifier: "[a-zA-Z_]+"

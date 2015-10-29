@@ -16,11 +16,15 @@ class ListController extends BaseController
         $this->searchService = $searchService;
     }
 
-    public function listAction($offset)
+    public function listAction($offset, $typeIdentifier)
     {
         $limit = 10;
         $query = new LocationQuery();
-        $query->query = new Criterion\Subtree('/1/');
+        if ( $typeIdentifier ) {
+            $query->query = new Criterion\ContentTypeIdentifier($typeIdentifier);
+        } else {
+            $query->query = new Criterion\Subtree('/1/');
+        }
         $query->offset = (int)$offset;
         $query->limit = $limit;
         $results = $this->searchService->findLocations($query);
@@ -34,6 +38,7 @@ class ListController extends BaseController
             $next = $offset + $limit;
         }
         return $this->render('EzSystemsExtendingPlatformUIConferenceBundle:List:list.html.twig', [
+            'typeIdentifier' => $typeIdentifier,
             'results' => $results,
             'previous' => $previous,
             'next' => $next,
