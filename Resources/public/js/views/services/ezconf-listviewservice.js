@@ -25,12 +25,16 @@ YUI.add('ezconf-listviewservice', function (Y) {
         _load: function (callback) {
             // the request allows to retrieve the matched parameters
             var offset = this.get('request').params.offset,
+                typeIdentifier = this.get('request').params.typeIdentifier,
                 uri;
 
             if ( !offset ) {
                 offset = 0;
             }
             uri = this.get('app').get('apiRoot') + 'list/' + offset;
+            if ( typeIdentifier ) {
+                uri += '/' + typeIdentifier;
+            }
 
             Y.io(uri, {
                 method: 'GET',
