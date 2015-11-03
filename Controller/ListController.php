@@ -2,6 +2,8 @@
 
 namespace EzSystems\ExtendingPlatformUIConferenceBundle\Controller;
 
+use eZ\Publish\Core\QueryType\ArrayQueryTypeRegistry;
+use eZ\Publish\Core\QueryType\QueryTypeRegistry;
 use EzSystems\PlatformUIBundle\Controller\Controller as BaseController;
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\ContentTypeService;
@@ -14,16 +16,17 @@ class ListController extends BaseController
 
     private $contentTypeService;
 
-    public function __construct(SearchService $searchService, ContentTypeService $contentTypeService)
+    public function __construct(SearchService $searchService, ContentTypeService $contentTypeService, ArrayQueryTypeRegistry $queryTypeRegistry)
     {
         $this->searchService = $searchService;
         $this->contentTypeService = $contentTypeService;
+        $this->queryTypeRegistry = $queryTypeRegistry;
     }
 
     public function listAction($offset, $typeIdentifier)
     {
         $typesByGroup = [];
-        $typesByIdentifier = [];
+        $typesById = [];
         $groups = $this->contentTypeService->loadContentTypeGroups();
         foreach($groups as $group) {
             $typesByGroup[$group->identifier] = $this->contentTypeService->loadContentTypes($group);
@@ -32,26 +35,21 @@ class ListController extends BaseController
             }
         }
 
-        $limit = 10;
-        $type = null;
-        $query = new LocationQuery();
-        if ( $typeIdentifier ) {
-            $type = $this->contentTypeService->loadContentTypeByIdentifier($typeIdentifier);
-            $query->query = new Criterion\ContentTypeIdentifier($type->identifier);
-        } else {
-            $query->query = new Criterion\Subtree('/1/');
+        $queryParameters = ['offset' => (int)$offset, 'limit' => 10];
+        if ($typeIdentifier) {
+            $queryParameters['type'] = $this->contentTypeService->loadContentTypeByIdentifier($typeIdentifier)->identifier;
         }
-        $query->offset = (int)$offset;
-        $query->limit = $limit;
-        $results = $this->searchService->findLocations($query);
+        $results = $this->searchService->findLocations(
+            $this->queryTypeRegistry->getQueryType('ContentByType')->getQuery($queryParameters)
+        );
 
         $previous = false;
         $next = false;
         if ( $offset > 0 ) {
-            $previous = max(0, $offset - $limit);
+            $previous = max(0, $offset - $queryParameters['limit']);
         }
-        if ( ($offset + $limit) < $results->totalCount ) {
-            $next = $offset + $limit;
+        if ( ($offset + $queryParameters['limit']) < $results->totalCount ) {
+            $next = $offset + $queryParameters['limit'];
         }
         return $this->render('EzSystemsExtendingPlatformUIConferenceBundle:List:list.html.twig', [
             'groups' => $groups,
