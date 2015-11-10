@@ -10,7 +10,7 @@
     <fieldset>
         <legend class="ezconf-list-toolbar-legend">Filter by Content Type</legend>
         <p class="ezconf-list-filter pure-form">
-            <label for="types-list">Choose a Content Type to only display Contents of this type</label>
+            <label for="types-list">Choose a Content Type to only display Content Items of this type</label>
             <select id="types-list" class="ezconf-list-types">
                 <option value="">None</option>
             {% for group in groups %}
@@ -25,7 +25,7 @@
     </fieldset>
 </div>
 
-<h2>{{ results.totalCount }} contents{% if contentType %} of type "{{ contentType.names['eng-GB'] }}"{% endif %}</h2>
+<h2>{{ results.totalCount }} content items{% if contentType %} of type "{{ contentType.names['eng-GB'] }}"{% endif %}</h2>
 
 {% if previous is not same as (false) or next %}
 <ul class="ezconf-list-pagination">
