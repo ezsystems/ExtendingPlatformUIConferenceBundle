@@ -1,5 +1,3 @@
 # ExtendingPlatformUIConferenceBundle
 
-Example bundle for the **Extending PlatformUI** eZ Conference 2015 workshop.
-
-The associated slides are available at http://dpobel.github.io/slides-ez/extending-platformui-ezconference-2015/#/
+This repository contains the bundle that is created in the [Extending PlatformUI tutorial](https://doc.ezplatform.com/en/1.13/tutorials/extending_platformui/extending_platformui_with_new_navigation/).
