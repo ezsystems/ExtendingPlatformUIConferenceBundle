@@ -1,5 +1,11 @@
 services:
     ezsystems.extendingplatformuiconference.controller.list:
         class: EzSystems\ExtendingPlatformUIConferenceBundle\Controller\ListController
-        arguments: [@ezpublish.api.service.search, @ezpublish.api.service.content_type]
+        arguments: [@ezpublish.api.service.search, @ezpublish.api.service.content_type, @ezpublish.query_type.registry]
         parent: ezsystems.platformui.controller.base
+
+    ezsystems.extendingplatformuiconference.content_by_type_query_type:
+        class: EzSystems\ExtendingPlatformUIConferenceBundle\QueryType\ContentByType
+        arguments: [@ezpublish.api.service.content_type]
+        tags:
+            - {name: 'ezpublish.query_type'}
